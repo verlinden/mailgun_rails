@@ -12,6 +12,9 @@ module MailgunRails
     end
 
     def send_message(options)
+      # https://stackoverflow.com/questions/9469825/why-uri-escape-fails-when-called-on-actionviewoutputbuffer
+      options[:html] = options[:html].to_str
+
       RestClient::Request.execute(
               method: :post,
               url: mailgun_url,
